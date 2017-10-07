@@ -2,6 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CodeExample from './CodeExample';
 
+import styled from 'styled-components';
+
+const ExampleWrapper = styled.div`
+  padding : 0 12px;
+
+`;
+
+const ExampleTitle = styled.div`
+  display: flex;
+  align-items : center;
+
+  p:first-child {
+    flex: 1 1 auto;
+  }
+`;
+
 class Example extends React.Component {
   constructor(props) {
     super(props);
@@ -19,23 +35,22 @@ class Example extends React.Component {
     const {showCode} = this.state;
     const {code, description, name} = this.props.example;
     // Must use CommonJS require to dynamically require because ES Modules must be statically analyzable.
-    console.log('this.props.componentName ', this.props.componentName);
-    console.log('this.props.componentName ', name);
+
     const ExampleComponent = require(`./examples/${this.props.componentName}/${name}`).default;
     return (
-      <div className="example">
-        {description && <h4>{description}</h4> }
-
-        <ExampleComponent />
-
-        <p>
+      <ExampleWrapper className={this.props.className}>
+        <ExampleTitle>
+          {description && <p>{description}</p>}
           <a href="" onClick={this.toggleCode}>
             {showCode ? "Hide" : "Show"} Code
           </a>
-        </p>
+        </ExampleTitle>
+
+
+        <ExampleComponent />
 
         {showCode && <CodeExample>{code}</CodeExample>}
-      </div>
+      </ExampleWrapper>
     )
   }
 }

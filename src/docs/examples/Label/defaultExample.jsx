@@ -1,7 +1,7 @@
 import React from 'react';
-import HelloWorld from 'fluky-components/Label';
+import Label from 'fluky-components/Label';
 
-/** Custom message */
+/** Default label example */
 export default function ExampleHelloWorld() {
-  return <HelloWorld message="Pluralsight viewers!" />
+  return <Label>The label content</Label>;
 }
