@@ -5,24 +5,24 @@ import wrapInTheme from '../wrapInTheme';
 
 // import styled from 'styled-components';
 
-/** An Icon component */
-class Icon extends Component {
+/** An IconIon component */
+class IconIon extends Component {
   render() {
 
-    const t = require('./paths/alert-outline');
+    const t = require('./paths/account-convert');
 
     return (
       <svg className="umbrella" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-labelledby="title">
-	      <title id="title">Umbrella Icon</title>
+	      <title id="title">Umbrella IconIon</title>
         <path d={t}/>
       </svg>
     );
   }
 }
 
-Icon.propTypes = {
-  /** The Icon name available from a list */
+IconIon.propTypes = {
+  /** The IconIon name available from a list */
   type : PropTypes.string.isRequired
 };
 
-export default wrapInTheme(Icon);
+export default wrapInTheme(IconIon);
