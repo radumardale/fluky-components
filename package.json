@@ -1,5 +1,5 @@
 {
-  "name": "fluky-components",
+  "name": "fluky-components-build-template",
   "version": "0.1.0",
   "description": "Random React components",
   "main": "index.js",
@@ -63,7 +63,9 @@
     "webpack-manifest-plugin": "1.2.1",
     "whatwg-fetch": "2.0.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
+  },
   "scripts": {
     "prestart": "npm run gen:docs",
     "start": "npm-run-all --parallel start:docs gen:docs-watch",
