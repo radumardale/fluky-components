@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/radumardale/fluky-components/issues"
   },
-  "homepage": "https://github.com/radumardale/fluky-components#readme",
+  "homepage": "https://radumardale.github.io/fluky-components/",
   "author": "Radu Mardale <radu.mardale@gmail.com>",
   "dependencies": {
     "autoprefixer": "7.1.2",
@@ -79,7 +79,7 @@
     "build:lib": "npm-run-all --parallel build:commonjs build:css build:copy-files",
     "build:copy-files": "node scripts/copyBuildFiles.js",
     "predeploy:docs": "npm run build:docs",
-    "deploy:docs": "gh-pages -d build",
+    "deploy:docs": "gh-pages -d build -b gh-pages",
     "build:commonjs": "cross-env NODE_ENV=production babel ./src/components --out-dir ./lib --ignore spec.js",
     "prepublish": "npm run build:lib"
   },
