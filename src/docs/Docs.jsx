@@ -5,15 +5,49 @@ import componentData from '../../config/componentData';
 
 import './globalStyles';
 
-import styled from 'styled-components';
+import theme from '../theme';
+
+// import FlukyPng from '../resources/fluky-logo.png';
+
+import styled, { ThemeProvider } from 'styled-components';
+
+
+const CenterLayout = styled.div`
+  max-width: 910px;
+  display: flex;
+  margin: 8px auto;
+`;
+
+const BrandTitle = styled.h3`
+  font-style : '';
+  font-weight : normal;
+  color: ${ p => p.theme.colors.primaryColorText };
+`;
+
+// const FlukyLogo = styled.div`
+//   background-image: url(${FlukyPng});
+//   background-size: 50% 50%;
+//   width: 100px;
+//   height: 100px;
+//   background-repeat: no-repeat;
+// `;
 
 const Page = styled.div`
   display : flex;
   min-height : 100%;
 `;
 
+const Header = styled.header`
+  height     : 5rem;
+  width      : 100%;
+  position   : absolute;
+  top        : 0;
+  left       : 0;
+  background : ${ p => p.theme.colors.primaryColorDark };
+  box-shadow:         0px 3px 5px rgba(100, 100, 100, 0.5);
+`;
+
 const NavigationStyled = styled(Navigation)`
-  height: 100%;
   max-width: 200px;
   width: 15%;
 `;
@@ -22,7 +56,14 @@ const MainArea = styled(ComponentPage)`
   flex : 1 1 auto;
 `;
 
-export default class Docs extends React.Component {
+const ContentWrapper = styled.div`
+  width : 80%;
+  max-width: 910px;
+  display: flex;
+  margin: 8px auto;
+`;
+
+export default class Docs extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -41,13 +82,23 @@ export default class Docs extends React.Component {
     const component = route ? componentData.filter( component => component.name === route)[0] : componentData[0];
 
     return (
-      <Page>
-        <NavigationStyled
-          activeComponent={this.state.route}
-          components={componentData.map(component => component.name)}
-        />
-        <MainArea component={component} />
-      </Page>
+      <ThemeProvider theme={theme}>
+        <Page>
+          <Header>
+            <CenterLayout>
+              <BrandTitle>fluky-components</BrandTitle>
+            </CenterLayout>
+          </Header>
+
+          <ContentWrapper>
+            <NavigationStyled
+              activeComponent={this.state.route}
+              components={componentData.map(component => component.name)}
+            />
+            <MainArea component={component} />
+          </ContentWrapper>
+        </Page>
+      </ThemeProvider>
     )
   }
 }

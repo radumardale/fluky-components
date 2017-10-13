@@ -6,7 +6,7 @@ import wrapInTheme from '../wrapInTheme';
 
 const InputStyled = styled.input`
 
-  font-size: ${ p => p.compact ? p.theme.typography.size.XS : p.theme.typography.size.normal };
+  font-size: ${ p => p.compact ? p.theme.typo.size.XS : p.theme.typo.size.normal };
 
   padding : ${ p => p.compact ? `${p.theme.gap.XS} ${p.theme.gap.XS}` : `${p.theme.gap.M} ${p.theme.gap.S}`};
 `;

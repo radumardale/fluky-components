@@ -13,6 +13,8 @@ injectGlobal`
 
     line-height : 1.5;
 
+    margin-top : 5rem;
+
   }
 
 `;

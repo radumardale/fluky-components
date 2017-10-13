@@ -9,7 +9,7 @@ import styled from 'styled-components';
 const CheckboxStyled = styled.div`
   display : flex;
   flex-direction : ${ p => p.labelPosition === 'right' ? 'row' : 'row-reverse' };
-  // font-size: ${ p => p.compact ? p.theme.typography.size.XS : p.theme.typography.size.normal };
+  // font-size: ${ p => p.compact ? p.theme.typo.size.XS : p.theme.typo.size.normal };
   // color: #546E7A;
 `;
 

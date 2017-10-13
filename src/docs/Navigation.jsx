@@ -10,25 +10,22 @@ const NavigationDrawer = styled.ul`
   padding : 0;
   margin : 0;
   min-width : 120px;
-  color: #263238;
-`;
-
-const BrandItem = styled.li`
-  font-size : 10px;
-  padding : 12px 4px;
+  color: #FFA630;
+  // background: #E5E5E5;
 `;
 
 const ComponentItem = styled.li`
   padding : 4px 12px;
-  background : ${ p => p.active ? '#E0F7FA' : 'none' };
+  background : ${ p => p.active ? '#D7E8BA' : 'none' };
   a {
     display: flex;
-    color: #0E4183;
+    color: ${ p => p.active ? '#FFA630' : '#0E4183' };
     text-decoration : none;
   }
 
   &:hover {
-    background : #E0F7FA;
+    color: #FFA630;
+    background : #D7E8BA;
   }
 `;
 
@@ -38,9 +35,6 @@ const Navigation = ({ components, className, activeComponent}) => {
 
   return (
     <NavigationDrawer className={classes}>
-      <BrandItem>
-        fluky-components
-      </BrandItem>
       {
         components.map( name => {
           return (

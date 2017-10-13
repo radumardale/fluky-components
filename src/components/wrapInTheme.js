@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ThemeProvider } from 'styled-components';
 
-import theme from './theme';
+import theme from '../theme';
 
 // wrapInTheme :: Component -> Component
 export default Component => (props) => {
