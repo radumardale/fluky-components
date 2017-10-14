@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 
+import VerticalMenu from '../components/VerticalMenu';
+
 import styled from 'styled-components';
 
 const NavigationDrawer = styled.ul`
@@ -34,20 +36,23 @@ const Navigation = ({ components, className, activeComponent}) => {
   const classes = classnames(className);
 
   return (
-    <NavigationDrawer className={classes}>
-      {
-        components.map( name => {
-          return (
-            <ComponentItem
-              active={activeComponent===name}
-              key={name}
-            >
-              <a href={`#${name}`}>{name}</a>
-            </ComponentItem>
-          )
-        })
-      }
-    </NavigationDrawer>
+    <div>
+      <NavigationDrawer className={classes}>
+        {
+          components.map( name => {
+            return (
+              <ComponentItem
+                active={activeComponent===name}
+                key={name}
+              >
+                <a href={`#${name}`}>{name}</a>
+              </ComponentItem>
+            )
+          })
+        }
+      </NavigationDrawer>
+      <VerticalMenu items={[]} />
+    </div>
   )
 }
 

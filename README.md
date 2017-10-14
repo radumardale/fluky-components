@@ -14,6 +14,10 @@ It uses:
 
 Because of theming all the components are wrapped in a `styled-component`'s `ThemeProvider`.
 
+TODO:
+add side menu
+group components by type
+
 ## Components:
 
 ### Atoms:

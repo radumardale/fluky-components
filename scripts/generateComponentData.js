@@ -5,37 +5,64 @@ var parse = require('react-docgen').parse;
 var chokidar = require('chokidar');
 
 var paths = {
-  examples: path.join(__dirname, '../src', 'docs', 'examples'),
-  components: path.join(__dirname, '../src', 'components'),
-  output: path.join(__dirname, '../config', 'componentData.js')
+  atoms: {
+    components: path.join(__dirname, '../src', 'components', 'atoms'),
+    examples: path.join(__dirname, '../src', 'doc', 'examples', 'atoms'),
+    output: path.join(__dirname, '../config', 'atomsData.js'),
+  },
+  molecules: {
+    components: path.join(__dirname, '../src', 'components', 'molecules'),
+    examples: path.join(__dirname, '../src', 'doc', 'examples', 'molecules'),
+    output: path.join(__dirname, '../config', 'moleculesData.js'),
+  }
+};
+
+const generateCategory = (options) => {
+  const errors = [];
+  const componentData = getDirectories(options.components).map(componentName => {
+    try {
+      return getComponentData(options.components, componentName);
+    } catch(error) {
+      errors.push('An error occurred while attempting to generate metadata for ' + componentName + '. ' + error);
+    }
+  });
+  writeFile(options.output, "module.exports = /* eslint-disable */ " + JSON.stringify(errors.length ? errors : componentData));
+};
+
+const runAllCategories = (paths) => {
+  generateCategory(paths.atoms);
+  generateCategory(paths.molecules);
 };
 
 const enableWatchMode = process.argv.slice(2) == '--watch';
 if (enableWatchMode) {
   // Regenerate component metadata when components or examples change.
-  chokidar.watch([paths.examples, paths.components]).on('change', function(event, path) {
-    generate(paths);
+  chokidar.watch([paths.atoms.examples, paths.atoms.components]).on('change', function(event, path) {
+    generateCategory(paths.atoms);
+  });
+  chokidar.watch([paths.molecules.examples, paths.molecules.components]).on('change', function(event, path) {
+    generateCategory(paths.molecules);
   });
 } else {
   // Generate component metadata
-  generate(paths);
+  runAllCategories(paths);
 }
 
-function generate(paths) {
-  var errors = [];
-  var componentData = getDirectories(paths.components).map(function(componentName) {
-    try {
-      return getComponentData(paths, componentName);
-    } catch(error) {
-      errors.push('An error occurred while attempting to generate metadata for ' + componentName + '. ' + error);
-    }
-  });
-  writeFile(paths.output, "module.exports = /* eslint-disable */ " + JSON.stringify(errors.length ? errors : componentData));
-}
+// function generate(paths) {
+//   var errors = [];
+//   var componentData = getDirectories(paths.components).map(function(componentName) {
+//     try {
+//       return getComponentData(paths, componentName);
+//     } catch(error) {
+//       errors.push('An error occurred while attempting to generate metadata for ' + componentName + '. ' + error);
+//     }
+//   });
+//   writeFile(paths.output, "module.exports = /* eslint-disable */ " + JSON.stringify(errors.length ? errors : componentData));
+// }
 
-function getComponentData(paths, componentName) {
-  var content = readFile(path.join(paths.components, componentName, componentName + '.jsx'));
-  var info = parse(content);
+function getComponentData(componentPath, componentName) {
+  const content = readFile(path.join(componentPath, componentName, componentName + '.jsx'));
+  const info = parse(content);
   return {
     name: componentName,
     description: info.description,
