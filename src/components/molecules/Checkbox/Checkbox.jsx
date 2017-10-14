@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Label from '@atoms/Label';
+// import Label from 'fluky-components/atoms/Label';
 
 import wrapInTheme from '../../wrapInTheme';
 
@@ -9,8 +9,6 @@ import styled from 'styled-components';
 const CheckboxStyled = styled.div`
   display : flex;
   flex-direction : ${ p => p.labelPosition === 'right' ? 'row' : 'row-reverse' };
-  // font-size: ${ p => p.compact ? p.theme.typo.size.XS : p.theme.typo.size.normal };
-  // color: #546E7A;
 `;
 
 const CheckboxInput = styled.input`

@@ -48,18 +48,6 @@ if (enableWatchMode) {
   runAllCategories(paths);
 }
 
-// function generate(paths) {
-//   var errors = [];
-//   var componentData = getDirectories(paths.components).map(function(componentName) {
-//     try {
-//       return getComponentData(paths, componentName);
-//     } catch(error) {
-//       errors.push('An error occurred while attempting to generate metadata for ' + componentName + '. ' + error);
-//     }
-//   });
-//   writeFile(paths.output, "module.exports = /* eslint-disable */ " + JSON.stringify(errors.length ? errors : componentData));
-// }
-
 function getComponentData(componentPath, componentName) {
   const content = readFile(path.join(componentPath, componentName, componentName + '.jsx'));
   const info = parse(content);

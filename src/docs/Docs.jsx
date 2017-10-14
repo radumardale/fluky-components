@@ -5,6 +5,12 @@ import componentData from '../../config/componentData';
 import atomsData from '../../config/atomsData';
 import moleculesData from '../../config/moleculesData';
 
+import {
+  BrowserRouter,
+  Route,
+  Link
+} from 'react-router-dom'
+
 import VerticalMenu from '../components/molecules/VerticalMenu';
 
 import './globalStyles';
@@ -94,7 +100,9 @@ export default class Docs extends React.Component{
   render() {
     const { route } = this.state;
 
-    const menu = [ {
+    const menu = [{
+      displayName : 'Icons',
+    },{
       displayName: 'Atoms',
       children : atomsData.map(dataToMenuItem)
     }, {
@@ -102,24 +110,27 @@ export default class Docs extends React.Component{
       children: moleculesData.map(dataToMenuItem)
     } ];
 
-    const component = route ? componentData.filter( component => component.name === route)[0] : componentData[0];
+    const allComponents = atomsData.concat(moleculesData);
+    const component = route ? allComponents.filter( component => component.name === route)[0] : componentData[0];
 
     return (
-      <ThemeProvider theme={theme}>
-        <Page>
-          <Header>
-            <CenterLayout>
-              <Logo src={logoPicture}></Logo>
-              <BrandTitle>fluky-components</BrandTitle>
-            </CenterLayout>
-          </Header>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <Page>
+            <Header>
+              <CenterLayout>
+                <Logo src={logoPicture}></Logo>
+                <BrandTitle>fluky-components</BrandTitle>
+              </CenterLayout>
+            </Header>
 
-          <ContentWrapper>
-            <NavigationStyled items ={menu}/>
-            <MainArea component={component} />
-          </ContentWrapper>
-        </Page>
-      </ThemeProvider>
+            <ContentWrapper>
+              <NavigationStyled items ={menu}/>
+              <MainArea component={component} />
+            </ContentWrapper>
+          </Page>
+        </ThemeProvider>
+      </BrowserRouter>
     )
   }
 }

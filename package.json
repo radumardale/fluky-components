@@ -56,7 +56,7 @@
     "promise": "8.0.1",
     "react-dev-utils": "^4.1.0",
     "react-docgen": "^2.18.0",
-    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "rimraf": "^2.6.2",
     "style-loader": "0.18.2",
     "stylus": "^0.54.5",

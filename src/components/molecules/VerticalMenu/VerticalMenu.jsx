@@ -5,10 +5,8 @@ import classnames from 'classnames';
 import wrapInTheme from '../../wrapInTheme';
 import menuItemType from '../../shapes/menuItemShape';
 
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-// import { MenuLeft, ChevronDown } from '../../icons';
-// import MenuLeft from '../../icons/MenuLeft';
 import MenuLeft from '../../icons/MenuLeft';
 import MenuDown from '../../icons/MenuDown';
 
@@ -34,10 +32,6 @@ const ParentLink = styled.div`
   cursor : pointer;
 `;
 
-// const slide = keyframes`
-//   100% { left: 0; }
-// `;
-
 const Link = styled.a`
 
   text-decoration : none;
@@ -58,9 +52,7 @@ const Link = styled.a`
 `;
 
 /**
- * # VerticalMenu
- *
- * Vertical menu component. Displays vertically links with nested items.
+ * Vertical menu component. Displays vertically links with nested items option.
 */
 class VerticalMenu extends Component {
 
