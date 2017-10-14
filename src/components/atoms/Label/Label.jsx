@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const LabelStyled = styled.label`
   font-size: ${ p => p.compact ? p.theme.typo.size.small : p.theme.typo.size.normal };
-  color: #546E7A;
+  color: ${ p => p.theme.colors.secondaryTextColor };
 `;
 
 /** A label component */

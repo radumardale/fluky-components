@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { isNil, compose, join, pluck } from 'ramda';
 
+import wrapInTheme from '../components/wrapInTheme';
+
 import styled from 'styled-components';
 
 const PropsTable = styled.table`
@@ -13,7 +15,8 @@ const PropsTable = styled.table`
 
 const TableHead = styled.thead`
   font-size : 14px;
-  background : #E0F7FA;
+  background : ${ p => p.theme.colors.primaryColorLight };
+  color: ${ p => p.theme.colors.primaryTextColor };
   text-align : left;
   th {
     padding : 4px 4px;
@@ -85,4 +88,4 @@ Props.propTypes = {
   props: PropTypes.object.isRequired
 };
 
-export default Props;
+export default wrapInTheme(Props);

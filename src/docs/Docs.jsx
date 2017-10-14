@@ -13,6 +13,7 @@ import theme from '../theme';
 
 import styled, { ThemeProvider } from 'styled-components';
 
+import logoPicture from '../resources/fluky3.png';
 
 const CenterLayout = styled.div`
   max-width: 910px;
@@ -24,15 +25,21 @@ const BrandTitle = styled.h3`
   font-style : '';
   font-weight : normal;
   color: ${ p => p.theme.colors.primaryColorText };
+  margin-left : ${ p => p.theme.gap.S };
+  text-stroke : 1px red;
+  // text-shadow: 1px 1px ${ p => p.theme.colors.secondaryTextColor };
+  text-shadow:
+  -1px -1px 0 ${ p => p.theme.greys[10] },
+   1px -1px 0 ${ p => p.theme.greys[10] },
+   -1px 1px 0 ${ p => p.theme.greys[10] },
+    1px 1px 0 ${ p => p.theme.greys[10] };
 `;
 
-// const FlukyLogo = styled.div`
-//   background-image: url(${FlukyPng});
-//   background-size: 50% 50%;
-//   width: 100px;
-//   height: 100px;
-//   background-repeat: no-repeat;
-// `;
+const Logo = styled.img`
+  flex       : 0 0 auto;
+  align-self : center;
+  height     : 2.5em;
+`;
 
 const Page = styled.div`
   display : flex;
@@ -104,6 +111,7 @@ export default class Docs extends React.Component{
         <Page>
           <Header>
             <CenterLayout>
+              <Logo src={logoPicture}></Logo>
               <BrandTitle>fluky-components</BrandTitle>
             </CenterLayout>
           </Header>
