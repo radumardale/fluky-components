@@ -7,9 +7,9 @@ import wrapInTheme from '../../wrapInTheme';
 const InputStyled = styled.input`
 
   font-family : ${ p => p.theme.typo.family };
-  font-size: ${ p => p.compact ? p.theme.typo.size.XS : p.theme.typo.size.normal };
+  font-size: ${ p => p.compact ? p.theme.typo.size.small : p.theme.typo.size.normal };
 
-  padding : ${ p => p.compact ? `${p.theme.gap.XS} ${p.theme.gap.XS}` : `${p.theme.gap.M} ${p.theme.gap.S}`};
+  padding : ${ p => p.compact ? `${p.theme.gap.XXXS} ${p.theme.gap.XXXS}` : `${p.theme.gap.S} ${p.theme.gap.XS}`};
 `;
 
 /** The input component */

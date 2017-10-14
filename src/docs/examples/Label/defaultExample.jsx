@@ -1,5 +1,5 @@
 import React from 'react';
-import Label from 'fluky-components/Label';
+import Label from 'fluky-components/atoms/Label';
 
 /** Default label example */
 export default function ExampleHelloWorld() {

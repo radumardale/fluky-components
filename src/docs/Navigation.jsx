@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 
-import VerticalMenu from '../components/VerticalMenu';
+import VerticalMenu from '../components/molecules/VerticalMenu';
 
 import styled from 'styled-components';
 

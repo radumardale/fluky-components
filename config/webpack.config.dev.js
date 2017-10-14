@@ -90,6 +90,8 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
+      '@atoms' : path.resolve(__dirname, '../src/components/atoms'),
+      '@molecules' : path.resolve(__dirname, '../src/components/molecules'),
       'fluky-components' : path.resolve(__dirname, '../src/components'),
     },
     plugins: [

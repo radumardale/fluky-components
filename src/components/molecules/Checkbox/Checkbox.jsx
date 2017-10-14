@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Label from '../Label';
+import Label from '@atoms/Label';
 
-import wrapInTheme from '../wrapInTheme';
+import wrapInTheme from '../../wrapInTheme';
 
 import styled from 'styled-components';
 
