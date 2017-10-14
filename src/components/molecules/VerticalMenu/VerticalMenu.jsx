@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 import wrapInTheme from '../../wrapInTheme';
 import menuItemType from '../../shapes/menuItemShape';
 
 import styled, { keyframes } from 'styled-components';
 
-import { ChevronLeft, ChevronDown } from '../../icons';
+// import { MenuLeft, ChevronDown } from '../../icons';
+// import MenuLeft from '../../icons/MenuLeft';
+import MenuLeft from '../../icons/MenuLeft';
+import MenuDown from '../../icons/MenuDown';
 
 import { isNil } from 'ramda';
 
@@ -24,16 +28,21 @@ const MenuItem = styled.li`
 
 `;
 
-const
-
-const slide = keyframes`
-  100% { left: 0; }
+const ParentLink = styled.div`
+  display : flex;
+  align-items: center;
+  cursor : pointer;
 `;
+
+// const slide = keyframes`
+//   100% { left: 0; }
+// `;
 
 const Link = styled.a`
 
   text-decoration : none;
   display         : flex;
+  flex : 1 1 auto;
   color           : ${ p => p.theme.colors.primaryColorDark };
   font-size       : ${ p => p.theme.typo.size.normal };
   border-bottom: 1px solid transparent;
@@ -55,33 +64,67 @@ const Link = styled.a`
 */
 class VerticalMenu extends Component {
 
-  getNestedMenu = children => {
-    if (isNil(children) || children.length === 0) {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openedMenus : []
+    };
+  }
+
+  getNestedMenu = item => {
+    if (isNil(item.children) || item.children.length === 0) {
       return null;
     }
+    if (this.state.openedMenus.indexOf(item.displayName) === -1) {
+      return null;
+    };
     return (
       <MenuList nested>
-        { children.map(this.getMenuItem) }
+        { item.children.map(this.getMenuItem) }
       </MenuList>
     );
   }
 
-  getIcon = (children) => {
-    if (isNil(children) || children.length === 0) {
+  getIcon = (item) => {
+    if (isNil(item.children) || item.children.length === 0) {
       return null;
     }
-    return (<ChevronLeft />);
+    const index = this.state.openedMenus.indexOf(item.displayName);
+    if (index >= 0) {
+      return < MenuDown/>;
+    }
+    return (<MenuLeft />);
+  }
+
+  toggleMenu = itemName => (e) => {
+    e.preventDefault();
+    const index = this.state.openedMenus.indexOf(itemName);
+    console.log(this.state.openedMenus, index);
+    if (index === -1) {
+      this.setState({
+        openedMenus: [...this.state.openedMenus].concat([itemName])
+      });
+    } else {
+      this.setState({
+        openedMenus: this.state.openedMenus.splice(index, 0)
+      });
+    }
   }
 
   getMenuItem = (item) => {
 
+    const noKids = isNil(item.children) || item.children.length === 0;
+    const itemProps = noKids ? {} : {
+      onClick : this.toggleMenu(item.displayName)
+    };
+
     return (
       <MenuItem key={`menu-${item.displayName}`}>
-        <div>
+        <ParentLink {...itemProps}>
           <Link href={item.link}>{item.displayName}</Link>
-          { this.getIcon(item.children) }
-        </div>
-        { this.getNestedMenu(item.children)}
+          { this.getIcon(item) }
+        </ParentLink>
+        { this.getNestedMenu(item)}
       </MenuItem>
     );
 
@@ -89,7 +132,7 @@ class VerticalMenu extends Component {
 
   render() {
     return (
-      <MenuList>
+      <MenuList className={classnames(this.props.className)}>
         { this.props.items.map(this.getMenuItem) }
       </MenuList>
     );

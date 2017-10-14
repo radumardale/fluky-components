@@ -25,9 +25,7 @@ const BrandTitle = styled.h3`
   font-style : '';
   font-weight : normal;
   color: ${ p => p.theme.colors.primaryColorText };
-  margin-left : ${ p => p.theme.gap.S };
-  text-stroke : 1px red;
-  // text-shadow: 1px 1px ${ p => p.theme.colors.secondaryTextColor };
+  margin-left : ${ p => p.theme.gap.M };
   text-shadow:
   -1px -1px 0 ${ p => p.theme.greys[10] },
    1px -1px 0 ${ p => p.theme.greys[10] },
@@ -56,8 +54,8 @@ const Header = styled.header`
   box-shadow:         0px 3px 5px rgba(100, 100, 100, 0.5);
 `;
 
-const NavigationStyled = styled(Navigation)`
-  max-width: 200px;
+const NavigationStyled = styled(VerticalMenu)`
+  max-width: 20rem;
   width: 15%;
 `;
 
@@ -117,7 +115,7 @@ export default class Docs extends React.Component{
           </Header>
 
           <ContentWrapper>
-            <VerticalMenu items ={menu}/>
+            <NavigationStyled items ={menu}/>
             <MainArea component={component} />
           </ContentWrapper>
         </Page>
