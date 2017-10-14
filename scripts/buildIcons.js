@@ -39,7 +39,8 @@ const generateAllIcons = paths => {
   cleanUp(paths);
   const iconTemplate = fs.readFileSync(paths.iconComponentSeed).toString();
   const icons = fs.readdirSync(paths.svgPathsFolder).map(svgPathName => {
-    const componentName = toComponentName(svgPathName);
+    let componentName = toComponentName(svgPathName);
+    componentName = componentName === 'React' ? 'ReactIcon' : componentName;
     const svgPath = fs.readFileSync(path.join(paths.svgPathsFolder, svgPathName)).toString();
 
     const newIconFolder = path.join(paths.outputFolder, componentName);

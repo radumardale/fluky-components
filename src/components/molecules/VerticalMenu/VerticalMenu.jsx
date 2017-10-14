@@ -6,7 +6,7 @@ import menuItemType from '../../shapes/menuItemShape';
 
 import styled, { keyframes } from 'styled-components';
 
-import { ChevronUp, ChevronDown } from '../../icons';
+import { ChevronLeft, ChevronDown } from '../../icons';
 
 import { isNil } from 'ramda';
 
@@ -19,9 +19,12 @@ const MenuList = styled.ul`
 
 const MenuItem = styled.li`
 
-  // padding : ${ p => p.theme.gap.XXS} ${p => p.theme.gap.XXXS };
+  display : flex;
+  flex-direction : column;
 
 `;
+
+const
 
 const slide = keyframes`
   100% { left: 0; }
@@ -63,12 +66,21 @@ class VerticalMenu extends Component {
     );
   }
 
+  getIcon = (children) => {
+    if (isNil(children) || children.length === 0) {
+      return null;
+    }
+    return (<ChevronLeft />);
+  }
+
   getMenuItem = (item) => {
 
     return (
       <MenuItem key={`menu-${item.displayName}`}>
-      <ChevronUp />, <ChevronDown />
-        <Link href={item.link}>{item.displayName}</Link>
+        <div>
+          <Link href={item.link}>{item.displayName}</Link>
+          { this.getIcon(item.children) }
+        </div>
         { this.getNestedMenu(item.children)}
       </MenuItem>
     );

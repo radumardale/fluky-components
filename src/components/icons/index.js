@@ -1509,7 +1509,7 @@ export {default as RayStartEnd} from './RayStartEnd';
 export {default as RayStart} from './RayStart';
 export {default as RayVertex} from './RayVertex';
 export {default as Rdio} from './Rdio';
-export {default as React} from './React';
+export {default as ReactIcon} from './ReactIcon';
 export {default as Read} from './Read';
 export {default as Readability} from './Readability';
 export {default as Receipt} from './Receipt';
