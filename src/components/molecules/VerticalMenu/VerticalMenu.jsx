@@ -6,6 +6,8 @@ import menuItemType from '../../shapes/menuItemShape';
 
 import styled, { keyframes } from 'styled-components';
 
+import { ChevronUp, ChevronDown } from '../../icons';
+
 import { isNil } from 'ramda';
 
 const MenuList = styled.ul`
@@ -65,6 +67,7 @@ class VerticalMenu extends Component {
 
     return (
       <MenuItem key={`menu-${item.displayName}`}>
+      <ChevronUp />, <ChevronDown />
         <Link href={item.link}>{item.displayName}</Link>
         { this.getNestedMenu(item.children)}
       </MenuItem>
