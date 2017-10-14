@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import MenuLeft from '../../icons/MenuLeft';
 import MenuDown from '../../icons/MenuDown';
 
+import { Link } from 'react-router-dom';
 import { isNil } from 'ramda';
 
 const MenuList = styled.ul`
@@ -32,16 +33,16 @@ const ParentLink = styled.div`
   cursor : pointer;
 `;
 
-const Link = styled.a`
+const StyledLink = styled(Link)`
 
   text-decoration : none;
   display         : flex;
-  flex : 1 1 auto;
+  flex            : 1 1 auto;
   color           : ${ p => p.theme.colors.primaryColorDark };
   font-size       : ${ p => p.theme.typo.size.normal };
-  border-bottom: 1px solid transparent;
+  border-bottom   : 1px solid transparent;
 
-  transition: color .5s;
+  transition      : color .5s;
 
   padding : ${ p => p.theme.gap.XXS} ${p => p.theme.gap.XXXS };
 
@@ -113,7 +114,7 @@ class VerticalMenu extends Component {
     return (
       <MenuItem key={`menu-${item.displayName}`}>
         <ParentLink {...itemProps}>
-          <Link href={item.link}>{item.displayName}</Link>
+          <StyledLink to={item.link ? item.link : '#'}>{item.displayName}</StyledLink>
           { this.getIcon(item) }
         </ParentLink>
         { this.getNestedMenu(item)}

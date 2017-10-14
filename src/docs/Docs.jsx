@@ -1,14 +1,14 @@
 import React from 'react';
-import Navigation from './Navigation';
-import ComponentPage from './ComponentPage';
+// import Navigation from './Navigation';
+// import ComponentPage from './ComponentPage';
 import componentData from '../../config/componentData';
 import atomsData from '../../config/atomsData';
 import moleculesData from '../../config/moleculesData';
+import asyncComponent from './asyncComponent';
 
 import {
   BrowserRouter,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'
 
 import VerticalMenu from '../components/molecules/VerticalMenu';
@@ -20,6 +20,8 @@ import theme from '../theme';
 import styled, { ThemeProvider } from 'styled-components';
 
 import logoPicture from '../resources/fluky3.png';
+
+const IconsShowcase = asyncComponent(() => import('./pages/IconsShowcase'));
 
 const CenterLayout = styled.div`
   max-width: 910px;
@@ -65,7 +67,7 @@ const NavigationStyled = styled(VerticalMenu)`
   width: 15%;
 `;
 
-const MainArea = styled(ComponentPage)`
+const MainArea = styled.div`
   flex : 1 1 auto;
 `;
 
@@ -101,7 +103,8 @@ export default class Docs extends React.Component{
     const { route } = this.state;
 
     const menu = [{
-      displayName : 'Icons',
+      displayName: 'Icons',
+      link: '/icons'
     },{
       displayName: 'Atoms',
       children : atomsData.map(dataToMenuItem)
@@ -125,8 +128,14 @@ export default class Docs extends React.Component{
             </Header>
 
             <ContentWrapper>
-              <NavigationStyled items ={menu}/>
-              <MainArea component={component} />
+              <NavigationStyled items={menu} />
+              <MainArea>
+                {/* <ComponentPage component={component} /> */}
+                {/* <Route exact path="/icons" component={IconsShowcase}/> */}
+                {/* <Route exact path="/icons" component={asyncComponent(() => import('./pages/IconsShowcase'))}/> */}
+                <Route exact path="/icons" component={IconsShowcase}/>
+                {/* <Route exact path="/components" component={IconsShowcase}/> */}
+              </MainArea>
             </ContentWrapper>
           </Page>
         </ThemeProvider>
