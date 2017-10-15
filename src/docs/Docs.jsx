@@ -54,6 +54,7 @@ const Header = styled.header`
   left       : 0;
   background : ${ p => p.theme.colors.primaryColorDark };
   box-shadow:         0px 3px 5px rgba(100, 100, 100, 0.5);
+  background: linear-gradient( ${ p => p.theme.colors.primaryColor } , ${ p => p.theme.colors.primaryColorDark });
 `;
 
 const NavigationStyled = styled(VerticalMenu)`
