@@ -36,6 +36,7 @@
     "cpx": "^1.5.0",
     "cross-env": "^5.0.5",
     "css-loader": "0.28.4",
+    "debounce": "^1.0.2",
     "dotenv": "4.0.0",
     "eslint": "4.4.1",
     "eslint-config-react-app": "^2.0.1",
@@ -124,7 +125,7 @@
     "presets": [
       "react-app"
     ],
-    "plugins":[
+    "plugins": [
       "transform-decorators-legacy",
       "transform-class-properties"
     ]
