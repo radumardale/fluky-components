@@ -5,5 +5,15 @@ import registerServiceWorker from './registerServiceWorker';
 
 import '../node_modules/highlight.js/styles/ocean.css';
 
-ReactDOM.render(<Docs />, document.getElementById('root'));
+import { Provider } from 'mobx-react';
+
+import docStore from './docs/stores/documentationStore';
+
+const Root = (
+  <Provider docStore={docStore}>
+    <Docs />
+  </Provider>
+);
+
+ReactDOM.render(Root, document.getElementById('root'));
 registerServiceWorker();

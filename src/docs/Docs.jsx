@@ -1,29 +1,23 @@
 import React from 'react';
-// import Navigation from './Navigation';
-// import ComponentPage from './ComponentPage';
-import componentData from '../../config/componentData';
-import atomsData from '../../config/atomsData';
-import moleculesData from '../../config/moleculesData';
-import asyncComponent from './asyncComponent';
-
 import {
   BrowserRouter,
   Route
 } from 'react-router-dom'
 
+import asyncComponent from './asyncComponent';
+import { inject, observer } from 'mobx-react';
 import VerticalMenu from '../components/molecules/VerticalMenu';
-
 import './globalStyles';
-
 import theme from '../theme';
-
 import styled, { ThemeProvider } from 'styled-components';
-
 import logoPicture from '../resources/fluky3.png';
 
 const IconsShowcase = asyncComponent(() => import('./pages/IconsShowcase'));
+const ThemeShowcase = asyncComponent(() => import('./pages/ThemeShowcase'));
+const ComponentPage = asyncComponent(() => import('./ComponentPage'));
 
 const CenterLayout = styled.div`
+  width : 80%;
   max-width: 910px;
   display: flex;
   margin: 8px auto;
@@ -63,8 +57,9 @@ const Header = styled.header`
 `;
 
 const NavigationStyled = styled(VerticalMenu)`
-  max-width: 20rem;
-  width: 15%;
+  max-width: 140px;
+  min-width: 15%;
+  flex: 0 0 auto;
 `;
 
 const MainArea = styled.div`
@@ -78,43 +73,13 @@ const ContentWrapper = styled.div`
   margin: 8px auto;
 `;
 
-const dataToMenuItem = component => {
-  return {
-    displayName: component.name,
-    link: `#${component.name}`
-  };
-};
-
+@inject('docStore')
+@observer
 export default class Docs extends React.Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      route: window.location.hash.substr(1)
-    };
-  }
-
-  componentDidMount() {
-    window.addEventListener('hashchange', () => {
-      this.setState({ route: window.location.hash.substr(1) })
-    });
-  }
 
   render() {
-    const { route } = this.state;
 
-    const menu = [{
-      displayName: 'Icons',
-      link: '/icons'
-    },{
-      displayName: 'Atoms',
-      children : atomsData.map(dataToMenuItem)
-    }, {
-      displayName: 'Molecules',
-      children: moleculesData.map(dataToMenuItem)
-    } ];
-
-    const allComponents = atomsData.concat(moleculesData);
-    const component = route ? allComponents.filter( component => component.name === route)[0] : componentData[0];
+    const { menu } = this.props.docStore;
 
     return (
       <BrowserRouter>
@@ -130,11 +95,10 @@ export default class Docs extends React.Component{
             <ContentWrapper>
               <NavigationStyled items={menu} />
               <MainArea>
-                {/* <ComponentPage component={component} /> */}
-                {/* <Route exact path="/icons" component={IconsShowcase}/> */}
-                {/* <Route exact path="/icons" component={asyncComponent(() => import('./pages/IconsShowcase'))}/> */}
+                <Route exact path="/theme" component={ThemeShowcase}/>
                 <Route exact path="/icons" component={IconsShowcase}/>
-                {/* <Route exact path="/components" component={IconsShowcase}/> */}
+                <Route path="/atoms/:component" component={ComponentPage}/>
+                <Route path="/molecules/:component" component={ComponentPage}/>
               </MainArea>
             </ContentWrapper>
           </Page>

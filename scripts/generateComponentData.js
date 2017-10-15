@@ -7,12 +7,12 @@ var chokidar = require('chokidar');
 var paths = {
   atoms: {
     components: path.join(__dirname, '../src', 'components', 'atoms'),
-    examples: path.join(__dirname, '../src', 'doc', 'examples', 'atoms'),
+    examples: path.join(__dirname, '../src', 'docs', 'examples'),
     output: path.join(__dirname, '../config', 'atomsData.js'),
   },
   molecules: {
     components: path.join(__dirname, '../src', 'components', 'molecules'),
-    examples: path.join(__dirname, '../src', 'doc', 'examples', 'molecules'),
+    examples: path.join(__dirname, '../src', 'docs', 'examples'),
     output: path.join(__dirname, '../config', 'moleculesData.js'),
   }
 };
@@ -21,7 +21,7 @@ const generateCategory = (options) => {
   const errors = [];
   const componentData = getDirectories(options.components).map(componentName => {
     try {
-      return getComponentData(options.components, componentName);
+      return getComponentData(options, componentName);
     } catch(error) {
       errors.push('An error occurred while attempting to generate metadata for ' + componentName + '. ' + error);
     }
@@ -48,15 +48,15 @@ if (enableWatchMode) {
   runAllCategories(paths);
 }
 
-function getComponentData(componentPath, componentName) {
-  const content = readFile(path.join(componentPath, componentName, componentName + '.jsx'));
+function getComponentData(componentPaths, componentName) {
+  const content = readFile(path.join(componentPaths.components, componentName, componentName + '.jsx'));
   const info = parse(content);
   return {
     name: componentName,
     description: info.description,
     props: info.props,
     code: content,
-    examples: getExampleData(paths.examples, componentName)
+    examples: getExampleData(componentPaths.examples, componentName)
   }
 }
 
@@ -93,7 +93,7 @@ function getDirectories(filepath) {
 }
 
 function getFiles(filepath) {
-  return fs.readdirSync(filepath).filter(function(file) {
+  return fs.readdirSync(filepath).filter(function (file) {
     return fs.statSync(path.join(filepath, file)).isFile();
   });
 }

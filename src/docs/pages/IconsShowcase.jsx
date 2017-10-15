@@ -1,9 +1,6 @@
 // IconsShowcase
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import Input from 'fluky-components/atoms/Input';
-
 import styled from 'styled-components';
 
 const PageWrapper = styled.div`
@@ -14,7 +11,6 @@ const SearchField = styled(Input) `
   display : flex;
   min-width: 300px;
   width: 60%;
-  // margin: 0 auto;
 `;
 
 class IconsShowcase extends React.Component {
@@ -22,7 +18,7 @@ class IconsShowcase extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterString : ' asdasd'
+      filterString : ''
     };
   }
 
@@ -44,7 +40,7 @@ class IconsShowcase extends React.Component {
 
     return (
       <PageWrapper className={this.props.className}>
-        <h3>Icons showcase</h3>
+        <h2>Icons showcase</h2>
         <SearchField
           type="text"
           value={filterString}
@@ -56,10 +52,5 @@ class IconsShowcase extends React.Component {
     )
   }
 }
-
-// Example.propTypes = {
-//   example: PropTypes.object.isRequired,
-//   componentName: PropTypes.string.isRequired
-// }
 
 export default IconsShowcase;
