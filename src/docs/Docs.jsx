@@ -73,6 +73,29 @@ const ContentWrapper = styled.div`
   margin: 8px auto;
 `;
 
+const CornerRibbon = styled.div`
+  z-index: 10;
+  width: 200px;
+  background: ${ p => p.theme.colors.accentColor };
+  position: absolute;
+  top: 25px;
+  left: -50px;
+  text-align: center;
+  line-height: 50px;
+  letter-spacing: 1px;
+  color: ${ p => p.theme.colors.primaryColorDark };
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  font-weight : bold;
+
+  /* topleft */
+  top: 25px;
+  left: -50px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+
+`;
+
 @inject('docStore')
 @observer
 export default class Docs extends React.Component{
@@ -85,6 +108,7 @@ export default class Docs extends React.Component{
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <Page>
+            <CornerRibbon>Work in progress</CornerRibbon>
             <Header>
               <CenterLayout>
                 <Logo src={logoPicture}></Logo>

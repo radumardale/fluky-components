@@ -52,14 +52,14 @@ const ButtonStyled = styled.button`
   box-shadow: 0px 0px 6px ${ p => p.theme.greys[8] };
 
   &:hover {
-    box-shadow: 0px 0px 4px ${ p => p.theme.greys[8] };
+    box-shadow: 0px 0px 2px ${ p => p.theme.greys[8] };
     color : ${ p => darken(0.05, textColor(p))};
   }
 
   &:active {
     outline: none;
-    color : ${ p => darken(0.1, textColor(p))};
-    box-shadow: 0px 0px 2px ${ p => p.theme.greys[6] };
+    background : ${ p => darken(0.05, background(p))};
+    box-shadow: 0px 0px 1px ${ p => p.theme.greys[6] };
   }
 
   font-family: ${ p => p.theme.typo.family };
@@ -72,6 +72,7 @@ const ButtonStyled = styled.button`
   border-radius : 0.2rem;
   border : 1px solid ${ borderColor };
   background : ${ background };
+  background: linear-gradient( ${ background } , ${ p => darken(0.05, background(p))});
 
 `;
 
